@@ -1,0 +1,54 @@
+<body>
+  <div>海淀学校  由好到坏 橘色 绿色 蓝色 黑色</div>
+  <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  var point = new BMap.Point(116.307963, 39.947928);
+  map.centerAndZoom(point, 14);
+  map.enableScrollWheelZoom(true);
+  // 编写自定义函数,创建标注
+  function addMarker(point, l_name, l_address, level){
+    var marker = new BMap.Marker(point);
+    var searchInfoWindow = new BMapLib.SearchInfoWindow(map, l_address, {
+      title  : l_name,      //标题
+      width  : 290,             //宽度
+      height : 105,              //高度
+      panel  : "panel",         //检索结果面板
+      enableAutoPan : true,     //自动平移
+      searchTypes   :[
+        BMAPLIB_TAB_SEARCH,   //周边检索
+        BMAPLIB_TAB_TO_HERE,  //到这里去
+        BMAPLIB_TAB_FROM_HERE //从这里出发
+      ]
+    });
+    if(level == 11){
+      var icons = '<%= image_path "a.png" %>';  
+    }
+    if(level == 12){
+      var icons = '<%= image_path "b.png" %>';  
+    }
+    if(level == 21){
+      var icons = '<%= image_path "c.png" %>';  
+    }
+    if(level == 22){
+      var icons = '<%= image_path "d.png" %>';  
+    }
+    var icon = new BMap.Icon(icons, new BMap.Size(40, 40)); //显示图标大小
+    marker.setIcon(icon)
+    marker.addEventListener("click", function(){          
+      searchInfoWindow.open(marker);
+    });
+    map.addOverlay(marker);
+  }
+  var school_infos = <%=raw @school_infos%>;
+  for (var index in school_infos) {
+    var lat = school_infos[index].l_lat;
+    var lng = school_infos[index].l_lng;
+    //console.log(lat + "," + lng)
+    var p = new BMap.Point(lng, lat);
+    addMarker(p, school_infos[index].l_name, school_infos[index].l_address, school_infos[index].level);
+  }
+</script>
