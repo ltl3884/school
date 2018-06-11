@@ -25,9 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
-gem 'execjs'
-gem 'therubyracer', :platform => :ruby
-gem 'libv8', '3.16.14.19', :platforms => :ruby
+# gem 'execjs'
+# gem 'therubyracer', :platform => :ruby
+# gem 'libv8', '3.16.14.19', :platforms => :ruby
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
