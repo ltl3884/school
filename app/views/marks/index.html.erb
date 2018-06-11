@@ -1,0 +1,34 @@
+<p class="text-success" id="notice"><%= notice %></p>
+
+<div class="pull-left">
+  <h3 class="c-page-title">记录列表</h3>
+  <%= link_to '返回首页', "/" %>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>小区</th>
+      <th>打分</th>
+      <th>备注</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marks.each do |mark| %>
+      <tr>
+        <td><%= mark.xiaoqu %></td>
+        <td><%= mark.rate %></td>
+        <td><%= mark.remark %></td>
+        <td class="c-operations c-word-keep-all">
+          <%= link_to '编辑', edit_mark_path(mark) %>
+          <%= link_to '删除', mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新建', new_mark_path %>

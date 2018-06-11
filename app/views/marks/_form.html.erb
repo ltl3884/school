@@ -1,0 +1,29 @@
+<%= form_for(@mark, html: {role: "form"}) do |f| %>
+  <% if @mark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+      <% @mark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :小区 %>
+    <%= f.text_field :xiaoqu, class: 'form-control narrow' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :打分 %>
+    <%= f.select :rate, [5, 4, 3, 2, 1], class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :备注 %>
+    <%= f.text_area :remark, :cols => 10, :rows => 10, class: 'form-control narrow' %>
+  </div>
+  <div class="actions">
+    <%= f.submit '保存', {class: 'btn btn-primary'}%>
+  </div>
+<% end %>
